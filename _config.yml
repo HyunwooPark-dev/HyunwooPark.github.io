@@ -18,3 +18,14 @@ sass:
 
 paginate: 5
 paginate_path: "/page:num/"
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      show_date: true
+
+date_format: "%Y-%m-%d"
