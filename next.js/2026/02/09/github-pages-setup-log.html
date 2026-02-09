@@ -1,4 +1,251 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://hwp-log.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hwp-log.github.io/" rel="alternate" type="text/html" /><updated>2026-02-09T15:42:47+00:00</updated><id>https://hwp-log.github.io/feed.xml</id><title type="html">Engineering Log</title><subtitle>프로젝트, 기술 탐구, 공부 내용을 한 데 모은 개인 기록 저장소</subtitle><entry><title type="html">[next.js]ActiveLink 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log.html" rel="alternate" type="text/html" title="[next.js]ActiveLink 만들기" /><published>2026-02-09T00:00:00+00:00</published><updated>2026-02-09T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log.html"><![CDATA[<p>next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.27.3 by Michael Rose
+  Copyright 2013-2025 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[next.js]ActiveLink 만들기 - Engineering Log</title>
+<meta name="description" content="next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다. → https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Engineering Log">
+<meta property="og:title" content="[next.js]ActiveLink 만들기">
+<meta property="og:url" content="https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log.html">
+
+
+  <meta property="og:description" content="next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다. → https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2026-02-09T00:00:00+00:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log.html">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Engineering Log Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+
+<style>
+    /* 홈에서 Recent Posts 헤더 숨기기 */
+    .layout--home h3.archive__subtitle {
+        display: none !important;
+    }
+</style>
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="Engineering Log"></a>
+        
+        <a class="site-title" href="/">
+          Engineering Log
+          
+        </a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="https://hwp-log.github.io/" itemprop="url"></a>
+    </h3>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[next.js]ActiveLink 만들기">
+    <meta itemprop="description" content="next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.→ https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link">
+    <meta itemprop="datePublished" content="2026-02-09T00:00:00+00:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">
+            <a href="https://hwp-log.github.io/next.js/2026/02/09/github-pages-setup-log.html" itemprop="url">[next.js]ActiveLink 만들기
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2026-02-09T00:00:00+00:00">2026-02-09</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.
 → https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link</p>
 
 <p>강의내용은 x.com을 클론코딩하는 내용으로, 서비스에서 사용되는 기능을 next.js로 구현하는 것이 목적이다.
@@ -130,4 +377,84 @@
 
 <p>(/assets/post_images/2026-02-09/image0.png)</p>
 
-<p>해당 페이지에서 ActiveLink가 활성화 되었음을 알 수 있다.</p>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다. → https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link]]></summary></entry><entry><title type="html">GitHub Pages로 Engineering Log 띄우기 삽질기</title><link href="https://hwp-log.github.io/devlog/2026/02/09/next.js-session-2-2.html" rel="alternate" type="text/html" title="GitHub Pages로 Engineering Log 띄우기 삽질기" /><published>2026-02-09T00:00:00+00:00</published><updated>2026-02-09T00:00:00+00:00</updated><id>https://hwp-log.github.io/devlog/2026/02/09/next.js-session%202-2</id><content type="html" xml:base="https://hwp-log.github.io/devlog/2026/02/09/next.js-session-2-2.html"><![CDATA[<p>최초 Engineering Log 작성글</p>]]></content><author><name></name></author><category term="devlog" /><summary type="html"><![CDATA[최초 Engineering Log 작성글]]></summary></entry></feed>
+<p>해당 페이지에서 ActiveLink가 활성화 되었음을 알 수 있다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2026-02-09T00:00:00+00:00">2026-02-09</time></p>
+
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/devlog/2026/02/09/next.js-session-2-2.html" class="pagination--pager" title="GitHub Pages로 Engineering Log 띄우기 삽질기">Next</a>
+    
+  </nav>
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+
+<div class="page__footer-copyright">&copy; 2026 <a href="https://hwp-log.github.io">Engineering Log</a>. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
