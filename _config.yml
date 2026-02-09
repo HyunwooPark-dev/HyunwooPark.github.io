@@ -3,8 +3,6 @@ description: "프로젝트, 기술 탐구, 공부 내용을 한 데 모은 개�
 url: "https://hyunwoopark-dev.github.io" # 본인 주소
 baseurl: "/HyunwooPark.github.io"
 
-theme: minimal-mistakes-jekyll # Minimal Mistakes 테마 설정
-
 minimal_mistakes_skin: "default"
 
 plugins:
