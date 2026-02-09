@@ -1,1 +1,1 @@
-Sitemap: https://hyunwoopark-dev.github.io/HyunwooPark.github.io/sitemap.xml
+Sitemap: https://hyunwoopark-dev.github.io/sitemap.xml
