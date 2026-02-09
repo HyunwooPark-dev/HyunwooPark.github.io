@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Engineering Log
+author_profile: true
 ---
 
 프로젝트, 기술 탐구, 공부 내용을 한 데 모은 개인 기록 저장소입니다.  
