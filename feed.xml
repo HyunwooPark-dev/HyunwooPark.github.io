@@ -1,9 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://hwp-log.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hwp-log.github.io/" rel="alternate" type="text/html" /><updated>2026-02-11T15:09:41+00:00</updated><id>https://hwp-log.github.io/feed.xml</id><title type="html">Engineering Log</title><subtitle>프로젝트, 기술 탐구, 공부 내용을 한 데 모은 개인 기록 저장소</subtitle><entry><title type="html">[next.js] x-com의 나를 위한 트렌드 메뉴 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-3.html" rel="alternate" type="text/html" title="[next.js] x-com의 나를 위한 트렌드 메뉴 만들기" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/11/next.js-session%202-3</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-3.html"><![CDATA[<h2 id="글-작성-목적">글 작성 목적</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://hwp-log.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hwp-log.github.io/" rel="alternate" type="text/html" /><updated>2026-02-12T14:33:19+00:00</updated><id>https://hwp-log.github.io/feed.xml</id><title type="html">Engineering Log</title><subtitle>프로젝트, 기술 탐구, 공부 내용을 한 데 모은 개인 기록 저장소</subtitle><entry><title type="html">[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html" rel="alternate" type="text/html" title="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기" /><published>2026-02-12T00:00:00+00:00</published><updated>2026-02-12T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/12/next.js-session%202-23gang</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html"><![CDATA[<p>이번은 x.com의 홈 메뉴 컨텐츠 소비 기능을 만들어 보고자 한다. 많지 않은 기능처럼 보이지만, 사용자 관점에서 필요한 기능을 쪼개본다면 몇 가지 생각해야 할 부분이 많다.</p>
 
-<p>next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.<br />
-→ <a href="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-2.html">이전 글 바로가기</a></p>
+<p>첫번째 게시글 클릭 시 모달로 상세보기, 두번째 좋아요 버튼을 누른 게시글의 버튼 색상이 달라지는 기능, 세번째 게시글 하단의 댓글/리포스트/좋아요 버튼(상호작용 인터페이스), 네번째 새로 작성된 글을 “3분 전”이라 표시하여, SNS에서 정보의 신선도를 빠르게 파악하게 해주는 기능 등이 존재한다.</p>
 
-<p>x-com의 좌측메뉴 작성에 이어, 이번에는 우측메뉴를 작성하려고 한다.<br />
+<h2 id="왜-게시글-클릭시-모달로-상세보기-일까">왜? 게시글 클릭시, 모달로 상세보기 일까?</h2>
+<p>x.com을 사용하다 보면, 새로운 페이지 이동이 최소화 된 것을 알 수 있다. 생각보다 많은정보를 소화하기 위한 전략이라 할 수 있는데, 이는 전통적인 방식인 MPA 패턴이 해당 어플리케이션 패턴에 최적화 되기 어렵다고 추론할 수 있다. 특히 새로고침 및 페이지 이동은 사용자 입장에 있어서 사용자의 스크롤 위치, 입력 중인 내용, 현재 보던 맥락의 유실우려가 존재하여, UX 경험을 좋지 않게 할 수 있다. 이에 대응가능한 패러다임이 SPA (single Page application) 방식이다.</p>
+
+<p>SPA는 새로고침 및 페이지 이동을 최소화하여, 페이지 이동 및 사용자가 정보를 습득함에 있어서 잦은 이동이 줄어 사용경험의 혼잡함을 줄여준다는 장점이 있다. 그러나 이는 많은 정보를 담은 페이지의 경우를 뜻하며, 상대적으로 적은 정보를 담은 페이지는 MPA설계가 낫다는 의견도 많다. 그렇기에 한단계 높은 수준의 설계라기보다는 상황에 맞는 설계패턴이 탄생했다고 보는게 개인의 의견이다. 이에 대한 고찰은 추후 다뤄볼 생각이다.</p>
+
+<p>본론으로 다시 돌아와서, x.com은 이러한 SPA라는 패러다임 원칙에 맞게 로그인 부터 안쪽 컨텐츠 소비까지 철저하게 설계되었다는 점에 초점을 맞춰야한다. 그래야 해당 앱을 클론코딩을 하던 비슷하게 만들던, 적용된 Next.js의 기술들인 패러랠 라우팅, 인터셉팅 라우팅을 사용한 이유와 SPA설계 철학을 반영해 사용한 기술이라는 것을 알 수 있게 된다.</p>
+
+<h2 id="그럼-모달을-띄우기-위해-사용되는-라우팅-기술은-어떻게-적용할까">그럼 모달을 띄우기 위해, 사용되는 라우팅 기술은 어떻게 적용할까?</h2>
+<p>먼저, 모달을 소비하는 부분이 어디인지 생각해 보자. x.com을 사용해 본 유저라면 아래의 상황이 익숙할 것이다. 글 작성, 게시글 상세, 이미지 확대 등 다양한 곳에서 모달이 사용된다.
+<img src="/assets/post_images/2026-02-12/image3.png" alt="이미지처럼 글 작성, 게시글 상세, 이미지 확대" /></p>
+
+<p>기본적으로 이러한 페이지들이 모달을 사용하기 때문에, 이에 대한 default값을 설정 해줘야 한다. 방법은 의외로 간단하다. 세그먼트 별로 나뉜 폴더안에 default.tsx를 작성한뒤 아래처럼 함수를 정의해주면 된다.</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Default</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이렇게 설정해주면, 모달을 띄우기 전에는 null값을 던져주기 때문에, 페이지 작동에도 문제가 발생하지 않는다. 다만 각 세그먼트별로 대응해야 하다보니 더미페이지가 다수 발생한다는 단점이 존재한다. 또한 해당 모달을 렌더링하는 페이지에서는 반드시 “use client”를 작성해줘야 한다. 모달 내부에서 useState, useRef, onChange 같은 React 훅과 이벤트 핸들러 사용하기 때문이다.</p>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span><span class="c1">// &lt;- 작성시 클라이언트 컴포넌트 전환</span>
+
+<span class="k">import</span> <span class="nx">style</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./modal.module.css</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TweetModal</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">[</span><span class="nx">content</span><span class="p">,</span> <span class="nx">setContent</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">imageRef</span> <span class="o">=</span> <span class="nx">useRef</span><span class="o">&lt;</span><span class="nx">HTMLInputElement</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="kd">const</span> <span class="nx">onClickClose</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">onClickButton</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">onChangeContent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="c1">//..</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+    <span class="c1">//..</span>
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">inputDiv</span><span class="si">}</span><span class="p">&gt;</span>
+                        <span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">input</span><span class="si">}</span> <span class="na">placeholder</span><span class="p">=</span><span class="s">"무슨 일이 일어나고 있나요?"</span>
+                          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">content</span><span class="si">}</span>
+                          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChangeContent</span><span class="si">}</span>
+                        <span class="p">/&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">modalFooter</span><span class="si">}</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">actionButton</span><span class="si">}</span> <span class="na">disabled</span><span class="p">=</span><span class="si">{</span><span class="o">!</span><span class="nx">content</span><span class="si">}</span><span class="p">&gt;</span>게시하기<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+                    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="c1">//..</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[이번은 x.com의 홈 메뉴 컨텐츠 소비 기능을 만들어 보고자 한다. 많지 않은 기능처럼 보이지만, 사용자 관점에서 필요한 기능을 쪼개본다면 몇 가지 생각해야 할 부분이 많다.]]></summary></entry><entry><title type="html">[next.js] x-com의 나를 위한 트렌드 메뉴 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-21gang.html" rel="alternate" type="text/html" title="[next.js] x-com의 나를 위한 트렌드 메뉴 만들기" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/11/next.js-session%202-21gang</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-21gang.html"><![CDATA[<p>x-com의 좌측메뉴 작성에 이어, 이번에는 우측메뉴를 작성하려고 한다.<br />
 우측 메뉴는 사진과 같이 “나를 위한 트렌드” 메뉴가 존재한다.</p>
 
 <p><img src="/assets/post_images/2026-02-11/image0.png" alt="나를 위한 트랜드 예시" /></p>
@@ -129,7 +175,7 @@
 
 <p>6.우측 섹션에 반영 된 것을 확인 할 수 있다.</p>
 
-<p><img src="/assets/post_images/2026-02-11/image3.png" alt="반영내용" /></p>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[글 작성 목적]]></summary></entry><entry><title type="html">[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리</title><link href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-4.html" rel="alternate" type="text/html" title="[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/11/next.js-session%202-4</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-4.html"><![CDATA[<p>x.com의 로그인 후, 메인페이지를 보게 된다면 중앙에 ‘추천/팔로우’와 ‘내용’이 등장한다. 이때 추천/팔로우를 번갈아서 클릭 했을 때, 내용이 전환 될 필요가 존재한다. 문제는 ‘추천/팔로우’와’내용’의 각 컴포넌트가 형제(병렬) 관계이기 때문에, 일반적인 props 전달로는 상태를 공유 할 수 없다는 점이다.(React는 “데이터는 위에서 아래로 흐른다.” 라는 단방향 데이터흐름 설계원칙을 가지고 있어 부모 → 자식 prop전달이 기본이다.)</p>
+<p><img src="/assets/post_images/2026-02-11/image3.png" alt="반영내용" /></p>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[x-com의 좌측메뉴 작성에 이어, 이번에는 우측메뉴를 작성하려고 한다. 우측 메뉴는 사진과 같이 “나를 위한 트렌드” 메뉴가 존재한다.]]></summary></entry><entry><title type="html">[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리</title><link href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-22gang.html" rel="alternate" type="text/html" title="[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/11/next.js-session%202-22gang</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-22gang.html"><![CDATA[<p>x.com의 로그인 후, 메인페이지를 보게 된다면 중앙에 ‘추천/팔로우’와 ‘내용’이 등장한다. 이때 추천/팔로우를 번갈아서 클릭 했을 때, 내용이 전환 될 필요가 존재한다. 문제는 ‘추천/팔로우’와’내용’의 각 컴포넌트가 형제(병렬) 관계이기 때문에, 일반적인 props 전달로는 상태를 공유 할 수 없다는 점이다.(React는 “데이터는 위에서 아래로 흐른다.” 라는 단방향 데이터흐름 설계원칙을 가지고 있어 부모 → 자식 prop전달이 기본이다.)</p>
 
 <h2 id="형제간의-props-공유">형제간의 Props 공유?</h2>
 <p>결국 이를 해결하려면, ‘공통부모에서 상태를 내려주는 방식’이 필요하고 가장 간단한 방법으로 React의 ContextAPI를 활용하는 것이다. Redux같은 외부 라이브러리 없이 React 내장 기능만으로 해결할 수 있다.
@@ -168,7 +214,7 @@
   <span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>1의 경우, API 호출을 통한 TabContext를 설정해준다. Props의 기본값과 전환될 값을 설정해준다.
+<p>1의 경우, API 호출을 통한 TabContext를 설정해준다. Props의 기본값과 전환될 값을 설정해준다.<br />
 2의 경우, 적용될 컴포넌트를 감싸준다 (value값: 스위칭 될 Props)</p>
 
 <h3 id="homepagetsx에서의-적용">home/page.tsx에서의 적용</h3>
@@ -187,13 +233,13 @@
   )
 }
 </code></pre></div></div>
-<p>Tab 컴포넌트에서 PropsL rec,fol을 받으면,Post는 Props에 따라 내용을 전환해준다.</p>
+<p>Tab 컴포넌트에서 Props: rec,fol을 받으면,Post는 Props에 따라 내용을 전환해준다.</p>
 
 <h2 id="적용-결과">적용 결과</h2>
 
 <p><img src="/assets/post_images/2026-02-11/image6.png" alt="하드코딩 결과" /></p>
 
-<p>아직은 상태 받는쪽의 tab.tsx에서 설정을 안해주었기에 전환은 안되는상태. 프레임만 잡았다고 생각하자.</p>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[x.com의 로그인 후, 메인페이지를 보게 된다면 중앙에 ‘추천/팔로우’와 ‘내용’이 등장한다. 이때 추천/팔로우를 번갈아서 클릭 했을 때, 내용이 전환 될 필요가 존재한다. 문제는 ‘추천/팔로우’와’내용’의 각 컴포넌트가 형제(병렬) 관계이기 때문에, 일반적인 props 전달로는 상태를 공유 할 수 없다는 점이다.(React는 “데이터는 위에서 아래로 흐른다.” 라는 단방향 데이터흐름 설계원칙을 가지고 있어 부모 → 자식 prop전달이 기본이다.)]]></summary></entry><entry><title type="html">[next.js] x-com의 ActiveLink 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-2.html" rel="alternate" type="text/html" title="[next.js] x-com의 ActiveLink 만들기" /><published>2026-02-09T00:00:00+00:00</published><updated>2026-02-09T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/09/next.js-session%202-2</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-2.html"><![CDATA[<p>next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.<br />
+<p>아직은 상태 받는쪽의 tab.tsx에서 설정을 안해주었기에 전환은 안되는상태. 프레임만 잡았다고 생각하자.</p>]]></content><author><name></name></author><category term="next.js" /><summary type="html"><![CDATA[x.com의 로그인 후, 메인페이지를 보게 된다면 중앙에 ‘추천/팔로우’와 ‘내용’이 등장한다. 이때 추천/팔로우를 번갈아서 클릭 했을 때, 내용이 전환 될 필요가 존재한다. 문제는 ‘추천/팔로우’와’내용’의 각 컴포넌트가 형제(병렬) 관계이기 때문에, 일반적인 props 전달로는 상태를 공유 할 수 없다는 점이다.(React는 “데이터는 위에서 아래로 흐른다.” 라는 단방향 데이터흐름 설계원칙을 가지고 있어 부모 → 자식 prop전달이 기본이다.)]]></summary></entry><entry><title type="html">[next.js] x-com의 ActiveLink 만들기</title><link href="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-20gang.html" rel="alternate" type="text/html" title="[next.js] x-com의 ActiveLink 만들기" /><published>2026-02-09T00:00:00+00:00</published><updated>2026-02-09T00:00:00+00:00</updated><id>https://hwp-log.github.io/next.js/2026/02/09/next.js-session%202-20gang</id><content type="html" xml:base="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-20gang.html"><![CDATA[<p>next.js 기본기를 다지고자 이전 정리한 글에 이어 작성하는 기록이다.<br />
 → <a href="https://www.notion.so/next-js_session-1-2fd23927a2a7806c9437dbb874633045?source=copy_link">이전 정리 노션 문서 바로가기</a></p>
 
 <p>강의내용은 x.com을 클론코딩하는 내용으로, 서비스에서 사용되는 기능을 next.js로 구현하는 것이 목적이다.

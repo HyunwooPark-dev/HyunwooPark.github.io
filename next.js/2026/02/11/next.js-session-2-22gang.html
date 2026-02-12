@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Engineering Log">
 <meta property="og:title" content="[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리">
-<meta property="og:url" content="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-4.html">
+<meta property="og:url" content="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-22gang.html">
 
 
   <meta property="og:description" content="x.com의 로그인 후, 메인페이지를 보게 된다면 중앙에 ‘추천/팔로우’와 ‘내용’이 등장한다. 이때 추천/팔로우를 번갈아서 클릭 했을 때, 내용이 전환 될 필요가 존재한다. 문제는 ‘추천/팔로우’와’내용’의 각 컴포넌트가 형제(병렬) 관계이기 때문에, 일반적인 props 전달로는 상태를 공유 할 수 없다는 점이다.(React는 “데이터는 위에서 아래로 흐른다.” 라는 단방향 데이터흐름 설계원칙을 가지고 있어 부모 → 자식 prop전달이 기본이다.)">
@@ -37,7 +37,7 @@
 
 
 
-<link rel="canonical" href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-4.html">
+<link rel="canonical" href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-22gang.html">
 
 
 
@@ -219,7 +219,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-4.html" itemprop="url">[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리
+            <a href="https://hwp-log.github.io/next.js/2026/02/11/next.js-session-2-22gang.html" itemprop="url">[next.js] Context API - TabProvider를 활용한 홈 탭 상태관리
 </a>
           </h1>
           
@@ -284,7 +284,7 @@
   <span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>1의 경우, API 호출을 통한 TabContext를 설정해준다. Props의 기본값과 전환될 값을 설정해준다.
+<p>1의 경우, API 호출을 통한 TabContext를 설정해준다. Props의 기본값과 전환될 값을 설정해준다.<br />
 2의 경우, 적용될 컴포넌트를 감싸준다 (value값: 스위칭 될 Props)</p>
 
 <h3 id="homepagetsx에서의-적용">home/page.tsx에서의 적용</h3>
@@ -303,7 +303,7 @@
   )
 }
 </code></pre></div></div>
-<p>Tab 컴포넌트에서 PropsL rec,fol을 받으면,Post는 Props에 따라 내용을 전환해준다.</p>
+<p>Tab 컴포넌트에서 Props: rec,fol을 받으면,Post는 Props에 따라 내용을 전환해준다.</p>
 
 <h2 id="적용-결과">적용 결과</h2>
 
@@ -330,10 +330,10 @@
       
   <nav class="pagination">
     
-      <a href="/next.js/2026/02/11/next.js-session-2-3.html" class="pagination--pager" title="[next.js] x-com의 나를 위한 트렌드 메뉴 만들기">Previous</a>
+      <a href="/next.js/2026/02/11/next.js-session-2-21gang.html" class="pagination--pager" title="[next.js] x-com의 나를 위한 트렌드 메뉴 만들기">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="/next.js/2026/02/12/next.js-session-2-23gang.html" class="pagination--pager" title="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기">Next</a>
     
   </nav>
 
