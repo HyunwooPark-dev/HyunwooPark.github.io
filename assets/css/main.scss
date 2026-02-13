@@ -1,5 +1,17 @@
+---
+--- 
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
 h3.archive__subtitle {
   display: none !important;
+}
+
+.page {
+  float: none !important;
+  max-width: 1200px !important;
+  width: 100% !important;
+  margin: 0 auto;
+  padding: 0 24px;
 }
