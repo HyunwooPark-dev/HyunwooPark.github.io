@@ -1,5 +1,5 @@
 ---
---- 
+---
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
@@ -10,6 +10,14 @@ h3.archive__subtitle {
 
 .page {
   float: none !important;
+  max-width: 1200px !important;
+  width: 100% !important;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+// 메인 페이지(홈) 폭 넓히기
+.archive {
   max-width: 1200px !important;
   width: 100% !important;
   margin: 0 auto;
