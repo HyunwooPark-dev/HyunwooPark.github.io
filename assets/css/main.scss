@@ -1,8 +1,7 @@
----
----
+--- 
+--- 
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap');
-
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
@@ -10,7 +9,8 @@ h3.archive__subtitle {
   display: none !important;
 }
 
-html, body {
+html,
+body {
   font-family: 'IBM Plex Sans KR', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
@@ -38,5 +38,23 @@ html, body {
 
   p {
     margin-bottom: 1.6em;
+  }
+
+  a {
+    color: #2563EB !important;
+    text-decoration: none;
+
+    &:hover {
+      color: #1D4ED8 !important;
+    }
+  }
+
+  .masthead {
+    background-color: #2563EB !important;
+    border-bottom: none !important;
+  }
+
+  .greedy-nav a {
+    color: #ffffff !important;
   }
 }
