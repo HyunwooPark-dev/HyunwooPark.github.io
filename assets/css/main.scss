@@ -1,8 +1,6 @@
----
----
-
+--- 
+--- 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap');
-
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
@@ -10,7 +8,8 @@ h3.archive__subtitle {
   display: none !important;
 }
 
-html, body {
+html,
+body {
   font-family: 'IBM Plex Sans KR', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
@@ -39,4 +38,14 @@ html, body {
   p {
     margin-bottom: 1.6em;
   }
+}
+
+// 아카이브 목록 링크 배경색 바꾸기 (초록 → 파랑)
+.archive__item-title a::before {
+  background-color: #2563EB !important;
+}
+
+.archive__item-title a:hover::before,
+.archive__item-title a:focus::before {
+  background-color: #1D4ED8 !important;
 }
