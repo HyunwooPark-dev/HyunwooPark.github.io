@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기 - Engineering Log</title>
+<!-- begin _includes/seo.html --><title>[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편) - Engineering Log</title>
 <meta name="description" content="이번은 x.com의 홈 메뉴 컨텐츠 소비 기능을 만들어 보고자 한다. 많지 않은 기능처럼 보이지만, 사용자 관점에서 필요한 기능을 쪼개본다면 몇 가지 생각해야 할 부분이 많다.">
 
 
@@ -18,7 +18,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Engineering Log">
-<meta property="og:title" content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기">
+<meta property="og:title" content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)">
 <meta property="og:url" content="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html">
 
 
@@ -126,7 +126,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기">
+    <meta itemprop="headline" content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)">
     <meta itemprop="description" content="이번은 x.com의 홈 메뉴 컨텐츠 소비 기능을 만들어 보고자 한다.많지 않은 기능처럼 보이지만, 사용자 관점에서 필요한 기능을 쪼개본다면 몇 가지 생각해야 할 부분이 많다.">
     <meta itemprop="datePublished" content="2026-02-12T00:00:00+00:00">
     
@@ -135,7 +135,7 @@
       
         <header>
           <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html" itemprop="url">[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기
+            <a href="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html" itemprop="url">[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)
 </a>
           </h1>
           
@@ -177,7 +177,7 @@
 <p>본론으로 다시 돌아와서, x.com은 이러한 SPA라는 패러다임 원칙에 맞게 로그인 부터 안쪽 컨텐츠 소비까지 철저하게 SPA로 설계되었다는 점에 초점을 맞춰야한다. 그래야 Next.js의 기술들인 패러랠 라우팅, 인터셉팅 라우팅을 통해 비슷하게 클론코딩 하려는 이유를 알 수 있게 된다. (참고로 x.com닷컴은 Next.js가 아닌 자체 프레임워크로 만들어진 사이트이다. 다만 학습목적에서 Next.js로 구현하려는 것일 뿐 이다.)</p>
 
 <h2 id="패러랠-라우팅">패러랠 라우팅?</h2>
-<p>그렇다면, 패러랠 라우팅은 무엇일까? x-com에서는 메뉴의 한 페이지에 각 영역별로 정보가 담긴다. 이 정보가 담기는 영역마다 하나의 컴포넌트가 대응한다고 생각하면 된다.</p>
+<p>그렇다면, 패러랠 라우팅은 무엇일까? x.com에서는 메뉴의 한 페이지에 각 영역별로 정보가 담긴다. 이 정보가 담기는 영역마다 하나의 컴포넌트가 대응한다고 생각하면 된다.</p>
 
 <p><img src="/assets/post_images/2026-02-13/image.png" alt="패러랠 라우트" /></p>
 
@@ -188,22 +188,47 @@
 
 <p><img src="/assets/post_images/2026-02-13/image1.png" alt="인터셉팅 라우트" /></p>
 
-<p>예시이미지 처럼 사진을 클릭하면, 오버레이되어 사진을 모달로 표시할 수 있다. 그리고 이 경우 Next.js는 <code class="language-plaintext highlighter-rouge">/photo/123</code>경로를 가로채서 <code class="language-plaintext highlighter-rouge">/feed</code> 에 오버레이한다. 이때 주소창에는 Card.tsx경로가 표시가 안되는데, 이 기술을 인터셉팅 라우팅이라 한다.</p>
+<p>x.com 처럼 사진을 클릭하면, 오버레이되어 사진을 모달로 표시할 수 있다. 그리고 이 경우 Next.js는 <code class="language-plaintext highlighter-rouge">/photo/123</code>경로를 가로채서 <code class="language-plaintext highlighter-rouge">/feed</code> 에 오버레이한다. 이때 주소창에는 Card.tsx경로가 표시가 안되는데, 이 기술을 인터셉팅 라우팅이라 한다.</p>
 
-<p>→ 그럼 패러랠/인터셉팅 라우팅은 Next.js에서 어떻게 구현하는 것일까?</p>
+<p>-&gt; 그럼 패러랠/인터셉팅 라우팅은 Next.js에서 어떻게 구현하는 것일까?</p>
 
 <h2 id="패러랠인터셉팅-라우팅으로-모달-구현하기">패러랠/인터셉팅 라우팅으로 모달 구현하기</h2>
 <p>먼저, 모달을 소비하는 부분이 어디인지 생각해 보자. x.com을 사용해 본 유저라면 아래의 상황이 익숙할 것이다. 글 작성, 게시글 상세, 이미지 확대 등 다양한 곳에서 모달이 사용된다.
 <img src="/assets/post_images/2026-02-12/image3.png" alt="이미지처럼 글 작성, 게시글 상세, 이미지 확대" /></p>
 
-<p>기본적으로 이러한 페이지들이 모달을 사용하기 때문에, 이에 대한 default값을 설정 해줘야 한다. 방법은 의외로 간단하다. 세그먼트 별로 나뉜 폴더안에 default.tsx를 작성한뒤 아래처럼 함수를 정의해주면 된다.</p>
+<p>기본적으로 이러한 페이지들이 모달을 사용하기 때문에, 이에 대한 default값을 설정 해줘야 한다. 방법은 의외로 간단하다. 세그먼트 별로 나뉜 폴더안에 default.tsx를 작성한뒤, 함수를 정의해주면 된다.</p>
 
+<h2 id="폴더-구조">폴더 구조</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@modal/
+├── (.)compose/                    &lt;- 인터셉팅 라우트
+│   └── tweet/
+│       ├── modal.module.css
+│       └── page.tsx               &lt;- 글 작성 모달
+│
+├── [username]/
+│   ├── default.tsx                &lt;- 1번 default
+│   └── status/
+│       └── [id]/
+│           ├── default.tsx        &lt;- 2번 default
+│           └── photo/
+│               └── [photoId]/
+│                   ├── _component/
+│                   │   └── PhotoModalCloseButton.tsx
+│                   ├── page.tsx   &lt;- 사진 모달
+│                   └── photoModal.module.css
+│
+└── default.tsx                    &lt;- 3번 default
+</code></pre></div></div>
+
+<h2 id="코드-구조">코드 구조</h2>
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Default</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>이렇게 설정해주면, 모달을 띄우기 전에는 null값을 던져주기 때문에, 페이지 작동에도 문제가 발생하지 않는다. 다만 각 세그먼트별로 대응해야 하다보니 더미페이지가 다수 발생한다는 단점이 존재한다. 또한 해당 모달을 렌더링하는 페이지에서는 반드시 “use client”를 작성해줘야 한다. 모달 내부에서 useState, useRef, onChange 같은 React 훅과 이벤트 핸들러 사용하기 때문이다.</p>
+<p>이렇게 설정해주면, 모달을 띄우기 전에는 null값을 던져주기 때문에, 페이지 작동에도 문제가 발생하지 않는다. 다만 각 세그먼트별로 대응해야 하다보니 더미페이지가 다수 발생한다는 단점이 존재한다.(눈과 머리가 아프다.)</p>
+
+<p>두번째, 해당 모달을 렌더링하는 페이지에서는 반드시 “use client”를 작성해줘야 한다. 모달 내부에서 useState, useRef, onChange 같은 React 훅과 이벤트 핸들러 사용하기 때문이다.</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span><span class="c1">// &lt;- 모달의 인터랙션(useState, 이벤트)를 위해 필수</span>
 
@@ -234,6 +259,59 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
+<h2 id="구현하면서-이해한-것">구현하면서 이해한 것</h2>
+
+<h3 id="modal-폴더의-의미">@modal 폴더의 @의미</h3>
+<p>처음엔 왜 폴더명에 @가 붙는지 몰랐다.<br />
+슬롯 문법이라고 Next.js에서 사용하는 문법이라길래, 혹시나 해서 빼봤더니, 주소로 인식해서 작동을 안 해버린다.</p>
+
+<p>즉,</p>
+<ul>
+  <li>layout.tsx에서 props로 받아야 할 것을 url주소(/modal)로 받았기 때문에 지정한 컴포넌트에서 랜더링 되지 않는다.</li>
+</ul>
+
+<div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Layout</span><span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">modal</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+      <span class="si">{</span><span class="nx">modal</span><span class="si">}</span>  <span class="p">&lt;</span><span class="err">-</span> <span class="err">여기에</span> <span class="err">@</span><span class="na">modal</span> <span class="err">내용이</span> <span class="err">렌더링됨</span>
+    <span class="err">&lt;</span><span class="p">/&gt;</span>
+  )
+}
+</code></pre></div></div>
+
+<h3 id="compose-괄호의-의미">(.)compose 괄호의 의미</h3>
+<p>인터셉팅 라우트 문법이다:</p>
+<ul>
+  <li>’(.)’ : 같은 레벨 가로채기</li>
+  <li>‘(..)’ : 한 단계 위</li>
+  <li>‘(…)’ : 루트부터</li>
+</ul>
+
+<p>동작 방식:</p>
+<ul>
+  <li>내부 버튼/링크로 /compose 이동 -&gt; (.)compose가 가로채서 모달로</li>
+  <li>주소창에 /compose 직접 입력 -&gt; 전체 페이지로</li>
+</ul>
+
+<p>같은 URL인데 접근 방식에 따라 다르게 보인다.
+이게 x.com이 모달과 페이지를 URL로 관리하는 방법이었다.</p>
+
+<h3 id="defaulttsx가-3개나-되는-이유">default.tsx가 3개나 되는 이유</h3>
+<p>처음엔 “왜 이렇게 많아?” 싶었다.
+한 곳에만 만들면 안 되나?</p>
+
+<p>안 된다.
+각 라우트 레벨마다 슬롯이 비어있을 때:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home 접근          -&gt; @modal/default.tsx 필요
+/username/abc 접근  -&gt; @modal/[username]/default.tsx 필요
+/status/123 접근    -&gt; @modal/.../[id]/default.tsx 필요
+</code></pre></div></div>
+
+<p>Next.js가 각 세그먼트마다 슬롯을 체크하기 때문에
+각 레벨마다 fallback이 필요했다.</p>
+
+<p>더미 파일 양산되는 게 단점이긴 하다.</p>
 
         
       </section>
