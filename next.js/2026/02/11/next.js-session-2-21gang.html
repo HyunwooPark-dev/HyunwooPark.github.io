@@ -334,17 +334,13 @@
       if (!viewElement) return;
 
       var pageUrl = viewElement.getAttribute('data-url');
-      var apiUrl = 'https://hits.sh/hwp-log.github.io' + pageUrl + '.json';
 
-      fetch(apiUrl)
-        .then(function (response) { return response.json(); })
-        .then(function (data) {
-          viewElement.textContent = (data.hits || 0).toLocaleString();
-        })
-        .catch(function (error) {
-          console.error('Hits.sh error:', error);
-          viewElement.textContent = '0';
-        });
+      // 이미지 방식으로 조회수 카운트 (CORS 우회)
+      var img = new Image();
+      img.src = 'https://hits.sh/hwp-log.github.io' + pageUrl + '.svg?view=today-total&style=flat-square&label=views&extraCount=0';
+
+      // 눈 아이콘으로 표시
+      viewElement.innerHTML = '<i class="far fa-eye" aria-hidden="true"></i>';
     })();
   </script>
 
