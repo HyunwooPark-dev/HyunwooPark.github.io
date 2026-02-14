@@ -125,20 +125,25 @@
   
 
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork" >
+    
+    <meta itemprop="headline"
+      content="[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)">
+    
     <meta itemprop="description" content="이번은 x.com의 홈 메뉴 컨텐츠 소비 기능을 만들어 보고자 한다.많지 않은 기능처럼 보이지만, 사용자 관점에서 필요한 기능을 쪼개본다면 몇 가지 생각해야 할 부분이 많다.">
+    
+    
     <meta itemprop="datePublished" content="2026-02-12T00:00:00+00:00">
     
 
     <div class="page__inner-wrap">
       
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html" itemprop="url">[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)
+      <header>
+        <h1 id="page-title" class="page__title" itemprop="headline">
+          <a href="https://hwp-log.github.io/next.js/2026/02/12/next.js-session-2-23gang.html" itemprop="url">[next.js] x-com의 홈 메뉴 컨텐츠 소비 기능 만들기(모달편)</p>
 </a>
-          </h1>
-          
+        </h1>
+        
 
   <p class="page__meta">
     
@@ -156,7 +161,15 @@
   </p>
 
 
-        </header>
+
+        <!-- Hits.sh View Counter -->
+        <p class="page__meta" style="margin-top: -10px;">
+          <span style="color: #7a8288;">
+            <i class="far fa-fw fa-eye" aria-hidden="true"></i>
+            <span id="page-views" data-url="/next.js/2026/02/12/next.js-session-2-23gang.html">...</span> Views
+          </span>
+        </p>
+      </header>
       
 
       <section class="page__content" itemprop="text">
@@ -348,8 +361,27 @@
 
   
   
-</div>
 
+  <!-- Hits.sh View Counter Script -->
+  <script>
+    (function () {
+      var viewElement = document.getElementById('page-views');
+      if (!viewElement) return;
+
+      var pageUrl = viewElement.getAttribute('data-url');
+      var apiUrl = 'https://hits.shhttps://hwp-log.github.io' + pageUrl + '.json';
+
+      fetch(apiUrl)
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          viewElement.textContent = (data.hits || 0).toLocaleString();
+        })
+        .catch(function () {
+          viewElement.textContent = '0';
+        });
+    })();
+  </script>
+</div>
       
     </div>
 

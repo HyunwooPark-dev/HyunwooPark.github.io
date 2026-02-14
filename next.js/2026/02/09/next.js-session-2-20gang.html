@@ -125,20 +125,25 @@
   
 
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[next.js] x-com의 ActiveLink 만들기">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork" >
+    
+    <meta itemprop="headline"
+      content="[next.js] x-com의 ActiveLink 만들기">
+    
     <meta itemprop="description" content="x-com의 좌측메뉴 작성 및 현재사용 중인 메뉴를 알기위해 사용하는 기능을 작성하려고 한다.">
+    
+    
     <meta itemprop="datePublished" content="2026-02-09T00:00:00+00:00">
     
 
     <div class="page__inner-wrap">
       
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">
-            <a href="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-20gang.html" itemprop="url">[next.js] x-com의 ActiveLink 만들기
+      <header>
+        <h1 id="page-title" class="page__title" itemprop="headline">
+          <a href="https://hwp-log.github.io/next.js/2026/02/09/next.js-session-2-20gang.html" itemprop="url">[next.js] x-com의 ActiveLink 만들기</p>
 </a>
-          </h1>
-          
+        </h1>
+        
 
   <p class="page__meta">
     
@@ -156,7 +161,15 @@
   </p>
 
 
-        </header>
+
+        <!-- Hits.sh View Counter -->
+        <p class="page__meta" style="margin-top: -10px;">
+          <span style="color: #7a8288;">
+            <i class="far fa-fw fa-eye" aria-hidden="true"></i>
+            <span id="page-views" data-url="/next.js/2026/02/09/next.js-session-2-20gang.html">...</span> Views
+          </span>
+        </p>
+      </header>
       
 
       <section class="page__content" itemprop="text">
@@ -321,8 +334,27 @@ x-com의 좌측메뉴 작성 및 현재사용 중인 메뉴를 알기위해 사�
 
   
   
-</div>
 
+  <!-- Hits.sh View Counter Script -->
+  <script>
+    (function () {
+      var viewElement = document.getElementById('page-views');
+      if (!viewElement) return;
+
+      var pageUrl = viewElement.getAttribute('data-url');
+      var apiUrl = 'https://hits.shhttps://hwp-log.github.io' + pageUrl + '.json';
+
+      fetch(apiUrl)
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          viewElement.textContent = (data.hits || 0).toLocaleString();
+        })
+        .catch(function () {
+          viewElement.textContent = '0';
+        });
+    })();
+  </script>
+</div>
       
     </div>
 
